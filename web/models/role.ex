@@ -1,15 +1,15 @@
-defmodule Pxblog.Post do
+defmodule Pxblog.Role do
   use Pxblog.Web, :model
 
-  schema "posts" do
-    field :title, :string
-    field :body, :string
-    belongs_to :user, Pxblog.User
+  schema "roles" do
+    field :name, :string
+    field :admin, :boolean, default: false
+    has_many :users, Pxblog.User
 
     timestamps
   end
 
-  @required_fields ~w(title body)
+  @required_fields ~w(name admin)
   @optional_fields ~w()
 
   @doc """

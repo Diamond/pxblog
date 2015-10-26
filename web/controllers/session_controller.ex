@@ -9,10 +9,13 @@ defmodule Pxblog.SessionController do
     render conn, "new.html", changeset: User.changeset(%User{})
   end
 
-  def create(conn, %{"user" => user_params}) do
-    user = Repo.get_by(User, username: user_params["username"])
-    user
-    |> sign_in(user_params["password"], conn)
+  def create(conn, %{"user" => %{"username" => username, "password" => password}}) when not is_nil(username) and not is_nil(password) do
+    user = Repo.get_by(User, username: username)
+    sign_in(user, password, conn)
+  end
+
+  def create(conn, _) do
+    failed_login(conn)
   end
 
   def delete(conn, _params) do
@@ -23,22 +26,25 @@ defmodule Pxblog.SessionController do
   end
 
   defp sign_in(user, password, conn) when is_nil(user) do
-    conn
-    |> put_flash(:error, "Invalid username/password combination!")
-    |> redirect(to: page_path(conn, :index))
+    failed_login(conn)
   end
 
   defp sign_in(user, password, conn) do
     if checkpw(password, user.password_digest) do
       conn
-      |> put_session(:current_user, %{id: user.id, username: user.username})
+      |> put_session(:current_user, %{id: user.id, username: user.username, role_id: user.role_id})
       |> put_flash(:info, "Sign in successful!")
       |> redirect(to: page_path(conn, :index))
     else
-      conn
-      |> put_session(:current_user, nil)
-      |> put_flash(:error, "Invalid username/password combination!")
-      |> redirect(to: page_path(conn, :index))
+      failed_login(conn)
     end
+  end
+
+  defp failed_login(conn) do
+    conn
+    |> put_session(:current_user, nil)
+    |> put_flash(:error, "Invalid username/password combination!")
+    |> redirect(to: page_path(conn, :index))
+    |> halt()
   end
 end

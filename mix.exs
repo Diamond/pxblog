@@ -36,6 +36,7 @@ defmodule Pxblog.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.2"},
-     {:exrm, "~> 0.19.9"}]
+     {:exrm, "~> 0.19.9"},
+     {:conform, "~> 0.17.0"}]
   end
 end

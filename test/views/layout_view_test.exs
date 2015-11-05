@@ -1,11 +1,11 @@
 defmodule Pxblog.LayoutViewTest do
   use Pxblog.ConnCase
   alias Pxblog.LayoutView
-  alias Pxblog.TestHelper
+  alias Pxblog.Factory
 
   setup do
-    {:ok, role} = TestHelper.create_role(%{name: "User Role", admin: false})
-    {:ok, user} = TestHelper.create_user(role, %{email: "test@test.com", username: "testuser", password: "test", password_confirmation: "test"})
+    role = Factory.create(:role, %{})
+    user = Factory.create(:user, %{role: role})
     conn = conn()
     {:ok, conn: conn, user: user}
   end

@@ -1,10 +1,10 @@
 defmodule Pxblog.UserTest do
   use Pxblog.ModelCase
   alias Pxblog.User
-  alias Pxblog.TestHelper
+  alias Pxblog.Factory
 
   setup do
-    {:ok, role} = TestHelper.create_role(%{name: "user", admin: false})
+    role = Factory.create(:role, %{}) 
     {:ok, role: role}
   end
 

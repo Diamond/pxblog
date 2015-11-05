@@ -7,9 +7,9 @@ defmodule Pxblog.PostControllerTest do
   @invalid_attrs %{}
 
   setup do
-    role = Factory.create(:role, %{}) 
-    user = Factory.create(:user, %{role: role}) 
-    post = Factory.create(:post, %{user: user}) 
+    role = Factory.create(:role) 
+    user = Factory.create(:user, role: role) 
+    post = Factory.create(:post, user: user) 
 
     conn = conn() |> login_user(user)
     {:ok, conn: conn, user: user, role: role, post: post}
@@ -77,7 +77,7 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "redirects when trying to edit a post for a different user", %{conn: conn, role: role, post: post} do
-    other_user = Factory.create(:user, %{role: role}) 
+    other_user = Factory.create(:user, role: role) 
     conn = get conn, user_post_path(conn, :edit, other_user, post)
     assert get_flash(conn, :error) == "You are not authorized to modify that post!"
     assert redirected_to(conn) == page_path(conn, :index)
@@ -85,7 +85,7 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "redirects when trying to update a post for a different user", %{conn: conn, role: role, post: post} do
-    other_user = Factory.create(:user, %{role: role}) 
+    other_user = Factory.create(:user, role: role) 
     conn = put conn, user_post_path(conn, :update, other_user, post), %{"post" => @valid_attrs}
     assert get_flash(conn, :error) == "You are not authorized to modify that post!"
     assert redirected_to(conn) == page_path(conn, :index)
@@ -93,7 +93,7 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "redirects when trying to delete a post for a different user", %{conn: conn, role: role, post: post} do
-    other_user = Factory.create(:user, %{role: role}) 
+    other_user = Factory.create(:user, role: role) 
     conn = delete conn, user_post_path(conn, :delete, other_user, post)
     assert get_flash(conn, :error) == "You are not authorized to modify that post!"
     assert redirected_to(conn) == page_path(conn, :index)
@@ -101,8 +101,8 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "renders form for editing chosen resource when logged in as admin", %{conn: conn, user: user, post: post} do
-    role  = Factory.create(:role, %{admin: true})
-    admin = Factory.create(:user, %{role: role})
+    role  = Factory.create(:role, admin: true)
+    admin = Factory.create(:user, role: role)
     conn =
       login_user(conn, admin)
       |> get user_post_path(conn, :edit, user, post)
@@ -110,8 +110,8 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "updates chosen resource and redirects when data is valid when logged in as admin", %{conn: conn, user: user, post: post} do
-    role  = Factory.create(:role, %{admin: true})
-    admin = Factory.create(:user, %{role: role})
+    role  = Factory.create(:role, admin: true)
+    admin = Factory.create(:user, role: role)
     conn =
       login_user(conn, admin)
       |> put user_post_path(conn, :update, user, post), post: @valid_attrs
@@ -120,8 +120,8 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "does not update chosen resource and renders errors when data is invalid when logged in as admin", %{conn: conn, user: user, post: post} do
-    role  = Factory.create(:role, %{admin: true})
-    admin = Factory.create(:user, %{role: role})
+    role  = Factory.create(:role, admin: true)
+    admin = Factory.create(:user, role: role)
     conn =
       login_user(conn, admin)
       |> put user_post_path(conn, :update, user, post), post: %{"body" => nil}
@@ -129,8 +129,8 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "deletes chosen resource when logged in as admin", %{conn: conn, user: user, post: post} do
-    role  = Factory.create(:role, %{admin: true})
-    admin = Factory.create(:user, %{role: role})
+    role  = Factory.create(:role, admin: true)
+    admin = Factory.create(:user, role: role)
     conn =
       login_user(conn, admin)
       |> delete user_post_path(conn, :delete, user, post)

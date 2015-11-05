@@ -8,11 +8,11 @@ defmodule Pxblog.UserControllerTest do
   @invalid_attrs %{}
 
   setup do
-    user_role     = Factory.create(:role, %{})
-    nonadmin_user = Factory.create(:user, %{role: user_role}) 
+    user_role     = Factory.create(:role)
+    nonadmin_user = Factory.create(:user, role: user_role)
 
-    admin_role    = Factory.create(:role, %{admin: true})
-    admin_user    = Factory.create(:user, %{role: admin_role})
+    admin_role    = Factory.create(:role, admin: true)
+    admin_user    = Factory.create(:user, role: admin_role)
 
     conn = conn()
     {:ok, conn: conn, admin_role: admin_role, user_role: user_role, nonadmin_user: nonadmin_user, admin_user: admin_user}
@@ -132,7 +132,7 @@ defmodule Pxblog.UserControllerTest do
 
   @tag admin: true
   test "deletes chosen resource when logged in as that user", %{conn: conn, user_role: user_role} do
-    user = Factory.create(:user, %{role: user_role})
+    user = Factory.create(:user, role: user_role)
     conn =
       login_user(conn, user)
       |> delete user_path(conn, :delete, user)
@@ -142,7 +142,7 @@ defmodule Pxblog.UserControllerTest do
 
   @tag admin: true
   test "deletes chosen resource when logged in as an admin", %{conn: conn, user_role: user_role, admin_user: admin_user} do
-    user = Factory.create(:user, %{role: user_role})
+    user = Factory.create(:user, role: user_role)
     conn =
       login_user(conn, admin_user)
       |> delete user_path(conn, :delete, user)
@@ -152,7 +152,7 @@ defmodule Pxblog.UserControllerTest do
 
   @tag admin: true
   test "redirects away from deleting chosen resource when logged in as a different user", %{conn: conn, user_role: user_role, nonadmin_user: nonadmin_user} do
-    user = Factory.create(:user, %{role: user_role})
+    user = Factory.create(:user, role: user_role)
     conn =
       login_user(conn, nonadmin_user)
       |> delete user_path(conn, :delete, user)

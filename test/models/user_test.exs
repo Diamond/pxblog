@@ -4,7 +4,7 @@ defmodule Pxblog.UserTest do
   alias Pxblog.Factory
 
   setup do
-    role = Factory.create(:role, %{}) 
+    role = Factory.create(:role) 
     {:ok, role: role}
   end
 

@@ -3,8 +3,8 @@ defmodule Pxblog.SessionControllerTest do
   alias Pxblog.Factory
 
   setup do
-    role  = Factory.create(:role, %{})
-    user = Factory.create(:user, %{role: role})
+    role = Factory.create(:role)
+    user = Factory.create(:user, role: role)
     conn = conn()
     {:ok, conn: conn, user: user}
   end

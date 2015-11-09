@@ -13,7 +13,6 @@ defmodule Pxblog.UserControllerTest do
 
     admin_role    = Factory.create(:role, admin: true)
     admin_user    = Factory.create(:user, role: admin_role)
-
     conn = conn()
     {:ok, conn: conn, admin_role: admin_role, user_role: user_role, nonadmin_user: nonadmin_user, admin_user: admin_user}
   end
@@ -161,11 +160,11 @@ defmodule Pxblog.UserControllerTest do
     assert conn.halted
   end
 
-  defp valid_create_attrs(role) do
+  def valid_create_attrs(role) do
     Map.put(@valid_create_attrs, :role_id, role.id)
   end
 
-  defp login_user(conn, user) do
+  def login_user(conn, user) do
     post conn, session_path(conn, :create), user: %{username: user.username, password: user.password}
   end
 end

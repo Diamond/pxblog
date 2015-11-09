@@ -17,7 +17,7 @@ defmodule Pxblog.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Pxblog, []},
-     applications: app_list(Mix.env)] 
+     applications: app_list(Mix.env)]
   end
 
   defp app_list(:test), do: [:ex_machina | app_list]
@@ -39,6 +39,8 @@ defmodule Pxblog.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.2"},
+     {:exrm, "~> 0.19.9"},
+     {:conform, "~> 0.17.0"},
      {:ex_machina, "~> 0.4"}]
   end
 end

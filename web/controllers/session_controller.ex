@@ -32,7 +32,7 @@ defmodule Pxblog.SessionController do
   defp sign_in(user, password, conn) do
     if checkpw(password, user.password_digest) do
       conn
-      |> put_session(:current_user, %{id: user.id, username: user.username})
+      |> put_session(:current_user, %{id: user.id, username: user.username, role_id: user.role_id})
       |> put_flash(:info, "Sign in successful!")
       |> redirect(to: page_path(conn, :index))
     else

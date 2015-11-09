@@ -7,6 +7,7 @@ defmodule Pxblog.User do
     field :email, :string
     field :password_digest, :string
     has_many :posts, Pxblog.Post
+    belongs_to :role, Pxblog.Role
 
     timestamps
 
@@ -15,7 +16,7 @@ defmodule Pxblog.User do
     field :password_confirmation, :string, virtual: true
   end
 
-  @required_fields ~w(username email password password_confirmation)
+  @required_fields ~w(username email password password_confirmation role_id)
   @optional_fields ~w()
 
   @doc """

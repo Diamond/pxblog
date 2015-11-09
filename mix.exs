@@ -17,9 +17,12 @@ defmodule Pxblog.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Pxblog, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+     applications: app_list(Mix.env)]
   end
+
+  defp app_list(:test), do: [:ex_machina | app_list]
+  defp app_list(_), do: app_list
+  defp app_list, do: [:phoenix, :phoenix_html, :cowboy, :logger, :phoenix_ecto, :postgrex, :comeonin]
 
   # Specifies which paths to compile per environment
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
@@ -37,6 +40,7 @@ defmodule Pxblog.Mixfile do
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.2"},
      {:exrm, "~> 0.19.9"},
-     {:conform, "~> 0.17.0"}]
+     {:conform, "~> 0.17.0"},
+     {:ex_machina, "~> 0.4"}]
   end
 end

@@ -7,9 +7,9 @@ defmodule Pxblog.PostControllerTest do
   @invalid_attrs %{}
 
   setup do
-    role = Factory.create(:role) 
-    user = Factory.create(:user, role: role) 
-    post = Factory.create(:post, user: user) 
+    role = Factory.create(:role)
+    user = Factory.create(:user, role: role)
+    post = Factory.create(:post, user: user)
 
     conn = conn() |> login_user(user)
     {:ok, conn: conn, user: user, role: role, post: post}
@@ -77,7 +77,7 @@ defmodule Pxblog.PostControllerTest do
   end
 
   test "redirects when trying to edit a post for a different user", %{conn: conn, role: role, post: post} do
-    other_user = Factory.create(:user, role: role) 
+    other_user = Factory.create(:user, role: role)
     conn = get conn, user_post_path(conn, :edit, other_user, post)
     assert get_flash(conn, :error) == "You are not authorized to modify that post!"
     assert redirected_to(conn) == page_path(conn, :index)

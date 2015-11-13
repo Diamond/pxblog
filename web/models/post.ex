@@ -29,22 +29,11 @@ defmodule Pxblog.Post do
   end
 
   defp strip_unsafe_body(model, %{"body" => body}) do
-    model |> put_change(:body, strip_tags(body))
+    {:safe, clean_body} = Phoenix.HTML.html_escape(body)
+    model |> put_change(:body, clean_body)
   end
 
   defp strip_unsafe_body(model, params) do
     model
-  end
-
-  defp strip_tags(body) do
-    body
-    |> strip_tag("script")
-    |> strip_tag("iframe")
-    |> strip_tag("link")
-  end
-
-  defp strip_tag(body, tag) do
-    strip_regex = ~r{<#{tag}[^>]*>[^<]*</#{tag}>}i
-    body |> String.replace(strip_regex, "")
   end
 end

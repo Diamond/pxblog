@@ -7,7 +7,7 @@
   "earmark": {:hex, :earmark, "0.1.19"},
   "ecto": {:hex, :ecto, "1.0.6"},
   "erlware_commons": {:hex, :erlware_commons, "0.15.0"},
-  "ex_machina": {:hex, :ex_machina, "0.4.0"},
+  "ex_machina": {:hex, :ex_machina, "0.5.0"},
   "exrm": {:hex, :exrm, "0.19.9"},
   "fs": {:hex, :fs, "0.9.2"},
   "getopt": {:hex, :getopt, "0.8.2"},

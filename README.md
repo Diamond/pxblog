@@ -1,7 +1,7 @@
 # Pxblog
 
 To start your Phoenix app:
-  
+
   1. Change into the directory you want your project installed in with `cd example-folder`
   2. SSH clone this repo with `git clone git@github.com:Diamond/pxblog.git`
   3. Change into the pxblog directory with `cd pxblog`

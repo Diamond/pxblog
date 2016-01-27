@@ -2,7 +2,6 @@ defmodule Pxblog.PostTest do
   use Pxblog.ModelCase
 
   alias Pxblog.Post
-  import Ecto.Changeset, only: [get_change: 2]
 
   @valid_attrs %{"body" => "some content", "title" => "some content"}
   @invalid_attrs %{}
@@ -36,4 +35,5 @@ defmodule Pxblog.PostTest do
     changeset = Post.changeset(%Post{}, @valid_attrs)
     assert get_change(changeset, :body) == @valid_attrs["body"]
   end
+
 end

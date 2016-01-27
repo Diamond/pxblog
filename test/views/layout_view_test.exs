@@ -4,7 +4,7 @@ defmodule Pxblog.LayoutViewTest do
   alias Pxblog.Factory
 
   setup do
-    role = Factory.create(:role)
+    role = Factory.create(:role, admin: false)
     user = Factory.create(:user, role: role)
     conn = conn()
     {:ok, conn: conn, user: user}

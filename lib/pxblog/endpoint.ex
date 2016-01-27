@@ -33,7 +33,7 @@ defmodule Pxblog.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_pxblog_key",
-    signing_salt: "zGnDDkTF"
+    signing_salt: "y01pOc6r"
 
   plug Pxblog.Router
 end

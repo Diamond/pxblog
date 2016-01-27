@@ -10,7 +10,7 @@ defmodule Pxblog do
       # Start the endpoint when the application starts
       supervisor(Pxblog.Endpoint, []),
       # Start the Ecto repository
-      worker(Pxblog.Repo, []),
+      supervisor(Pxblog.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Pxblog.Worker, [arg1, arg2, arg3]),
     ]

@@ -6,8 +6,10 @@ defmodule Pxblog.User do
     field :username, :string
     field :email, :string
     field :password_digest, :string
-    has_many :posts, Pxblog.Post
+
     belongs_to :role, Pxblog.Role
+
+    has_many :posts, Pxblog.Post
 
     timestamps
 
@@ -29,10 +31,6 @@ defmodule Pxblog.User do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> hash_password
-    |> validate_confirmation(:password, message: "does not match password!")
-    |> unique_constraint(:username)
-    |> unique_constraint(:email)
-    |> validate_length(:password, min: 4)
   end
 
   defp hash_password(changeset) do

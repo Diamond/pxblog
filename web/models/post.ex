@@ -4,6 +4,7 @@ defmodule Pxblog.Post do
   schema "posts" do
     field :title, :string
     field :body, :string
+
     belongs_to :user, Pxblog.User
 
     timestamps
@@ -33,7 +34,7 @@ defmodule Pxblog.Post do
     model |> put_change(:body, clean_body)
   end
 
-  defp strip_unsafe_body(model, params) do
+  defp strip_unsafe_body(model, _) do
     model
   end
 end

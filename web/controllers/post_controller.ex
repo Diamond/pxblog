@@ -13,17 +13,15 @@ defmodule Pxblog.PostController do
   end
 
   def new(conn, _params) do
-    changeset =
-      conn.assigns[:user]
-      |> build(:posts)
+    changeset = conn.assigns[:user]
+      |> build_assoc(:posts)
       |> Post.changeset()
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}) do
-    changeset =
-      conn.assigns[:user]
-      |> build(:posts)
+    changeset = conn.assigns[:user]
+      |> build_assoc(:posts)
       |> Post.changeset(post_params)
 
     case Repo.insert(changeset) do
@@ -50,6 +48,7 @@ defmodule Pxblog.PostController do
   def update(conn, %{"id" => id, "post" => post_params}) do
     post = Repo.get!(assoc(conn.assigns[:user], :posts), id)
     changeset = Post.changeset(post, post_params)
+
     case Repo.update(changeset) do
       {:ok, post} ->
         conn
@@ -72,19 +71,26 @@ defmodule Pxblog.PostController do
     |> redirect(to: user_post_path(conn, :index, conn.assigns[:user]))
   end
 
-  defp assign_user(conn, _) do
-    %{"user_id" => user_id} = conn.params
-    if user = Repo.get(Pxblog.User, user_id) do
-      assign(conn, :user, user)
-    else
-      conn
-      |> put_flash(:error, "Invalid user!")
-      |> redirect(to: page_path(conn, :index))
-      |> halt()
+  defp assign_user(conn, _opts) do
+    case conn.params do
+      %{"user_id" => user_id} ->
+        case Repo.get(Pxblog.User, user_id) do
+          nil  -> invalid_user(conn)
+          user -> assign(conn, :user, user)
+        end
+      _ ->
+        invalid_user(conn)
     end
   end
 
-  defp authorize_user(conn, _) do
+  defp invalid_user(conn) do
+    conn
+    |> put_flash(:error, "Invalid user!")
+    |> redirect(to: page_path(conn, :index))
+    |> halt
+  end
+
+  defp authorize_user(conn, _opts) do
     user = get_session(conn, :current_user)
     if user && (Integer.to_string(user.id) == conn.params["user_id"] || Pxblog.RoleChecker.is_admin?(user)) do
       conn
@@ -92,7 +98,7 @@ defmodule Pxblog.PostController do
       conn
       |> put_flash(:error, "You are not authorized to modify that post!")
       |> redirect(to: page_path(conn, :index))
-      |> halt()
+      |> halt
     end
   end
 end

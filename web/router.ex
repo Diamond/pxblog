@@ -20,7 +20,6 @@ defmodule Pxblog.Router do
     resources "/users", UserController do
       resources "/posts", PostController
     end
-
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 

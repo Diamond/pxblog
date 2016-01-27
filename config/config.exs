@@ -9,7 +9,7 @@ use Mix.Config
 config :pxblog, Pxblog.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "xML/snARm3kKxkAJfWCr/Rfu1c6Ah6eS4UMIWbHkKkM6Qd9XVdeywVFytAdv6nas",
+  secret_key_base: "TaFtu7YnTmckiN8rSX3lxn4RefKXuMWzI8umM9rXHsbT39OTIUGNo5QLp8iLRUe9",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: Pxblog.PubSub,
            adapter: Phoenix.PubSub.PG2]

@@ -19,6 +19,7 @@ defmodule Pxblog.Web do
   def model do
     quote do
       use Ecto.Schema
+
       import Ecto
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
@@ -31,10 +32,10 @@ defmodule Pxblog.Web do
 
       alias Pxblog.Repo
       import Ecto
-      import Ecto.Model, only: [build: 2]
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Pxblog.Router.Helpers
+      import Pxblog.Gettext
     end
   end
 
@@ -49,6 +50,8 @@ defmodule Pxblog.Web do
       use Phoenix.HTML
 
       import Pxblog.Router.Helpers
+      import Pxblog.ErrorHelpers
+      import Pxblog.Gettext
     end
   end
 
@@ -65,7 +68,7 @@ defmodule Pxblog.Web do
       alias Pxblog.Repo
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
-
+      import Pxblog.Gettext
     end
   end
 

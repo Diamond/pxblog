@@ -9,9 +9,6 @@ config :pxblog, Pxblog.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-# Set a higher stacktrace during test
-config :phoenix, :stacktrace_depth, 20
-
 # Configure your database
 config :pxblog, Pxblog.Repo,
   adapter: Ecto.Adapters.Postgres,

@@ -23,6 +23,7 @@ defmodule Pxblog.Factory do
     }
   end
 
+
   def factory(:post) do
     %Post{
       title: "Some Post",

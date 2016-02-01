@@ -6,8 +6,10 @@ defmodule Pxblog.User do
     field :username, :string
     field :email, :string
     field :password_digest, :string
-    has_many :posts, Pxblog.Post
+
     belongs_to :role, Pxblog.Role
+
+    has_many :posts, Pxblog.Post
 
     timestamps
 

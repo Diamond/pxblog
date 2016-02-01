@@ -39,8 +39,6 @@ exports.config = {
   paths: {
     // Dependencies and current project directories to watch
     watched: [
-      "deps/phoenix/web/static",
-      "deps/phoenix_html/web/static",
       "web/static",
       "test/static"
     ],
@@ -64,6 +62,9 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    // Whitelist the npm deps to be pulled in as front-end assets.
+    // All other deps in package.json will be excluded from the bundle.
+    whitelist: ["phoenix", "phoenix_html"]
   }
 };

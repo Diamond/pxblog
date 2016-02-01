@@ -4,7 +4,7 @@ defmodule Pxblog.Repo.Migrations.CreatePost do
   def change do
     create table(:posts) do
       add :title, :string
-      add :body, :string
+      add :body, :text
 
       timestamps
     end

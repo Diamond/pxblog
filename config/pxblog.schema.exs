@@ -1,28 +1,34 @@
 [
   mappings: [
-    "pxblog.Elixir.Pxblog.Endpoint.url.host": [
-      doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.url.host here.",
-      to: "pxblog.Elixir.Pxblog.Endpoint.url.host",
+    "logger.console.format": [
+      doc: "Provide documentation for logger.console.format here.",
+      to: "logger.console.format",
       datatype: :binary,
-      default: "example.com"
+      default: """
+      $time $metadata[$level] $message
+      """
     ],
-    "pxblog.Elixir.Pxblog.Endpoint.url.port": [
-      doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.url.port here.",
-      to: "pxblog.Elixir.Pxblog.Endpoint.url.port",
-      datatype: :integer,
-      default: 80
+    "logger.console.metadata": [
+      doc: "Provide documentation for logger.console.metadata here.",
+      to: "logger.console.metadata",
+      datatype: [
+        list: :atom
+      ],
+      default: [
+        :request_id
+      ]
+    ],
+    "logger.level": [
+      doc: "Provide documentation for logger.level here.",
+      to: "logger.level",
+      datatype: :atom,
+      default: :info
     ],
     "pxblog.Elixir.Pxblog.Endpoint.root": [
       doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.root here.",
       to: "pxblog.Elixir.Pxblog.Endpoint.root",
       datatype: :binary,
       default: "/Users/brichey/Documents/dev/phoenix/pxblog"
-    ],
-    "pxblog.Elixir.Pxblog.Endpoint.secret_key_base": [
-      doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.secret_key_base here.",
-      to: "pxblog.Elixir.Pxblog.Endpoint.secret_key_base",
-      datatype: :binary,
-      default: "C0VuCzlCDYJgbgx9IEZGERHCyRfB3Mf7L4Du+aNQk/Ixrf6vlNr9QNXp8ECcNMle"
     ],
     "pxblog.Elixir.Pxblog.Endpoint.render_errors.accepts": [
       doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.render_errors.accepts here.",
@@ -53,6 +59,18 @@
       datatype: :binary,
       default: nil
     ],
+    "pxblog.Elixir.Pxblog.Endpoint.url.host": [
+      doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.url.host here.",
+      to: "pxblog.Elixir.Pxblog.Endpoint.url.host",
+      datatype: :binary,
+      default: "example.com"
+    ],
+    "pxblog.Elixir.Pxblog.Endpoint.url.port": [
+      doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.url.port here.",
+      to: "pxblog.Elixir.Pxblog.Endpoint.url.port",
+      datatype: :integer,
+      default: 80
+    ],
     "pxblog.Elixir.Pxblog.Endpoint.cache_static_manifest": [
       doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.cache_static_manifest here.",
       to: "pxblog.Elixir.Pxblog.Endpoint.cache_static_manifest",
@@ -65,6 +83,12 @@
       datatype: :atom,
       default: true
     ],
+    "pxblog.Elixir.Pxblog.Endpoint.secret_key_base": [
+      doc: "Provide documentation for pxblog.Elixir.Pxblog.Endpoint.secret_key_base here.",
+      to: "pxblog.Elixir.Pxblog.Endpoint.secret_key_base",
+      datatype: :binary,
+      default: "fmEw9VvdugAYE+2kNnWz5OgB99A0PW/bmVwlC9wm9To8FBfKP2rKiaaIPfgf6adq"
+    ],
     "pxblog.Elixir.Pxblog.Repo.adapter": [
       doc: "Provide documentation for pxblog.Elixir.Pxblog.Repo.adapter here.",
       to: "pxblog.Elixir.Pxblog.Repo.adapter",
@@ -75,13 +99,13 @@
       doc: "Provide documentation for pxblog.Elixir.Pxblog.Repo.username here.",
       to: "pxblog.Elixir.Pxblog.Repo.username",
       datatype: :binary,
-      default: "pxblog"
+      default: "postgres"
     ],
     "pxblog.Elixir.Pxblog.Repo.password": [
       doc: "Provide documentation for pxblog.Elixir.Pxblog.Repo.password here.",
       to: "pxblog.Elixir.Pxblog.Repo.password",
       datatype: :binary,
-      default: "s0m3pr0dp455"
+      default: "postgres"
     ],
     "pxblog.Elixir.Pxblog.Repo.database": [
       doc: "Provide documentation for pxblog.Elixir.Pxblog.Repo.database here.",
@@ -94,30 +118,6 @@
       to: "pxblog.Elixir.Pxblog.Repo.pool_size",
       datatype: :integer,
       default: 20
-    ],
-    "logger.console.format": [
-      doc: "Provide documentation for logger.console.format here.",
-      to: "logger.console.format",
-      datatype: :binary,
-      default: """
-      $time $metadata[$level] $message
-      """
-    ],
-    "logger.console.metadata": [
-      doc: "Provide documentation for logger.console.metadata here.",
-      to: "logger.console.metadata",
-      datatype: [
-        list: :atom
-      ],
-      default: [
-        :request_id
-      ]
-    ],
-    "logger.level": [
-      doc: "Provide documentation for logger.level here.",
-      to: "logger.level",
-      datatype: :atom,
-      default: :info
     ],
     "comeonin.bcrypt_log_rounds": [
       doc: "Provide documentation for comeonin.bcrypt_log_rounds here.",

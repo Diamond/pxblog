@@ -9,7 +9,7 @@
 
   <li>
     <strong>Body:</strong>
-    <%= markdown(@post.body) %>
+    <%= @post.body %>
   </li>
 
 </ul>

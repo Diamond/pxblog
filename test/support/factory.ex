@@ -15,7 +15,7 @@ defmodule Pxblog.Factory do
   def factory(:user) do
     %User{
       username: sequence(:username, &"User #{&1}"),
-      email: "test@test.com",
+      email: sequence(:email, &"test#{&1}@test.com"),
       password: "test1234",
       password_confirmation: "test1234",
       password_digest: Comeonin.Bcrypt.hashpwsalt("test1234"),

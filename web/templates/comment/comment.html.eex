@@ -1,0 +1,21 @@
+<div class="comment">
+  <div class="row">
+    <div class="col-xs-4">
+      <strong><%= @comment.author %></strong>
+    </div>
+    <div class="col-xs-4">
+      <em><%= @comment.inserted_at %></em>
+    </div>
+    <div class="col-xs-4 text-right">
+      <%= unless @comment.approved do %>
+        <button class="btn btn-xs btn-primary approve">Approve</button>
+      <% end %>
+      <button class="btn btn-xs btn-danger delete">Delete</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= @comment.body %>
+    </div>
+  </div>
+</div>

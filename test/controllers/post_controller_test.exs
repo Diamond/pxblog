@@ -25,6 +25,10 @@ defmodule Pxblog.PostControllerTest do
     post conn, session_path(conn, :create), user: %{username: user.username, password: user.password}
   end
 
+  defp logout_user(conn, user) do
+    delete conn, session_path(conn, :delete, user)
+  end
+
   defp build_post(user) do
     changeset = user
                 |> build_assoc(:posts)
@@ -53,10 +57,32 @@ defmodule Pxblog.PostControllerTest do
     assert html_response(conn, 200) =~ "New post"
   end
 
-  test "shows chosen resource", %{conn: conn, user: user} do
+  test "when logged in as the author, shows chosen resource with author flag set to true", %{conn: conn, user: user} do
     post = build_post(user)
-    conn = get conn, user_post_path(conn, :show, user, post)
+    conn = login_user(conn, user) |> get(user_post_path(conn, :show, user, post))
     assert html_response(conn, 200) =~ "Show post"
+    assert conn.assigns[:author_or_admin]
+  end
+
+  test "when logged in as an admin, shows chosen resource with author flag set to true", %{conn: conn, user: user, admin: admin} do
+    post = build_post(user)
+    conn = login_user(conn, admin) |> get(user_post_path(conn, :show, user, post))
+    assert html_response(conn, 200) =~ "Show post"
+    assert conn.assigns[:author_or_admin]
+  end
+
+  test "when not logged in, shows chosen resource with author flag set to false", %{conn: conn, user: user} do
+    post = build_post(user)
+    conn = logout_user(conn, user) |> get(user_post_path(conn, :show, user, post))
+    assert html_response(conn, 200) =~ "Show post"
+    refute conn.assigns[:author_or_admin]
+  end
+
+  test "when logged in as a different user, shows chosen resource with author flag set to false", %{conn: conn, user: user, other_user: other_user} do
+    post = build_post(user)
+    conn = login_user(conn, other_user) |> get(user_post_path(conn, :show, user, post))
+    assert html_response(conn, 200) =~ "Show post"
+    refute conn.assigns[:author_or_admin]
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn, user: user} do

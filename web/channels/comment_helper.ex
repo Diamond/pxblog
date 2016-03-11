@@ -22,6 +22,8 @@ defmodule Pxblog.CommentHelper do
       Repo.update(changeset)
     end)
   end
+  def approve(_params, %{}), do: {:error, "User is not authorized"}
+  def approve(_params, nil), do: {:error, "User is not authorized"}
 
   def delete(%{"postId" => post_id, "commentId" => comment_id}, %{assigns: %{user: user_id}}) do
     authorize_and_perform(post_id, user_id, fn ->
@@ -29,6 +31,8 @@ defmodule Pxblog.CommentHelper do
       Repo.delete(comment)
     end)
   end
+  def delete(_params, %{}), do: {:error, "User is not authorized"}
+  def delete(_params, nil), do: {:error, "User is not authorized"}
 
   defp authorize_and_perform(post_id, user_id, action) do
     post = get_post(post_id)

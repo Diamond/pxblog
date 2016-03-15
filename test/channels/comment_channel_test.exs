@@ -11,7 +11,7 @@ defmodule Pxblog.CommentChannelTest do
 
     {:ok, _, socket} =
       socket("user_id", %{user: user.id})
-      |> subscribe_and_join(CommentChannel, "comments:#{comment.id}")
+      |> subscribe_and_join(CommentChannel, "comments:#{post.id}")
 
     {:ok, socket: socket, post: post, comment: comment}
   end

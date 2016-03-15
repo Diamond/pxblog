@@ -6,9 +6,6 @@ defmodule Pxblog.CommentHelperTest do
 
   alias Pxblog.CommentHelper
 
-  @valid_attrs %{author: "Some Person", body: "This is a sample comment"}
-  @invalid_attrs %{}
-
   setup do
     user    = Factory.create(:user)
     post    = Factory.create(:post, user: user)

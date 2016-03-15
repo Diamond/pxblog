@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <%= if user = current_user(@conn) do %>
+      <%= tag :meta, name: "channel_token", content: Phoenix.Token.sign(@conn, "user", user.id) %>
+    <% end %>
 
     <title>Hello Pxblog!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">

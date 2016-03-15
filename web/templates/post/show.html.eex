@@ -1,3 +1,5 @@
+<input type="hidden" id="post-id" value="<%= @post.id %>">
+
 <h2>Show post</h2>
 
 <ul>

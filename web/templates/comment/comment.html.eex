@@ -1,8 +1,8 @@
 <%= if @conn.assigns[:author_or_admin] || @comment.approved do %>
-  <div class="comment">
+  <div id="comment-<%= @comment.id %>" class="comment" data-comment-id="<%= @comment.id %>">
     <div class="row">
       <div class="col-xs-4">
-        <strong><%= @comment.author %></strong>
+        <strong class="comment-author"><%= @comment.author %></strong>
       </div>
       <div class="col-xs-4">
         <em><%= @comment.inserted_at %></em>
@@ -10,22 +10,14 @@
       <div class="col-xs-4 text-right">
         <%= if @conn.assigns[:author_or_admin] do %>
           <%= unless @comment.approved do %>
-            <%= form_for @conn, post_comment_path(@conn, :update, @post, @comment), [method: :put, name: :comment, style: "display: inline;"], fn f -> %>
-              <%= hidden_input f, :approved, value: "true" %>
-              <%= submit "Approve", class: "btn btn-xs btn-primary approve" %>
-            <% end %>
+            <button class="btn btn-xs btn-primary approve">Approve</button>
           <% end %>
-            <%= link "Delete",
-                  method: :delete,
-                  to: post_comment_path(@conn, :delete, @post, @comment),
-                  class: "btn btn-xs btn-danger delete",
-                  data: [confirm: "Are you sure you want to delete this comment?"]
-            %>
+          <button class="btn btn-xs btn-danger delete">Delete</button>
         <% end %>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-12 comment-body">
         <%= @comment.body %>
       </div>
     </div>

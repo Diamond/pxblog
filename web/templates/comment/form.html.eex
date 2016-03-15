@@ -14,12 +14,11 @@
 
   <div class="form-group">
     <%= label f, :body, class: "control-label" %>
-    <%= textarea f, :body, class: "form-control", id: "body-editor" %>
+    <%= textarea f, :body, class: "form-control" %>
     <%= error_tag f, :body %>
   </div>
 
   <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <%= submit "Submit", class: "btn btn-primary create-comment" %>
   </div>
 <% end %>
-

@@ -12,12 +12,7 @@
     <%= @user.email %>
   </li>
 
-  <li>
-    <strong>Password digest:</strong>
-    <%= @user.password_digest %>
-  </li>
-
 </ul>
 
-<%= link "Edit", to: user_path(@conn, :edit, @user) %>
-<%= link "Back", to: user_path(@conn, :index) %>
+<%= link "Edit", to: user_path(@conn, :edit, @user), class: "button" %>
+<%= link "Back", to: user_path(@conn, :index), class: "button alert" %>

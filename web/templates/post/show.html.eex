@@ -1,32 +1,42 @@
 <input type="hidden" id="post-id" value="<%= @post.id %>">
 
-<h2>Show post</h2>
-
-<ul>
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
-
-  <li>
-    <strong>Body:</strong>
-    <div class="post-body">
-      <%= markdown(@post.body) %>
-    </div>
-  </li>
-</ul>
-
-<hr>
-
-<div class="comments">
-  <h2>Comments</h2>
-  <%= for comment <- @post.comments do %>
-    <%= render Pxblog.CommentView, "comment.html", comment: comment, author_or_admin: @conn.assigns[:author_or_admin], conn: @conn, post: @post %>
-  <% end %>
+<div class="row">
+  <div class="small-11 columns">
+    <h2>Show post</h2>
+  </div>
+  <div class="small-1 columns text-right">
+    <%= link "Edit", to: user_post_path(@conn, :edit, @conn.assigns[:user], @post), class: "button" %>
+  </div>
 </div>
 
-<hr>
-<%= render Pxblog.CommentView, "form.html", changeset: @comment_changeset, action: post_comment_path(@conn, :create, @post) %>
+<div class="row">
+  <ul>
+    <li>
+      <strong>Title:</strong>
+      <%= @post.title %>
+    </li>
 
-<%= link "Edit", to: user_post_path(@conn, :edit, @user, @post) %>
-<%= link "Back", to: user_post_path(@conn, :index, @user) %>
+    <li>
+      <strong>Body:</strong>
+      <div class="post-body">
+        <%= markdown(@post.body) %>
+      </div>
+    </li>
+  </ul>
+
+  <hr>
+
+  <div class="comments">
+    <h2>Comments</h2>
+    <%= for comment <- @post.comments do %>
+      <%= render Pxblog.CommentView, "comment.html", comment: comment, author_or_admin: @conn.assigns[:author_or_admin], conn: @conn, post: @post %>
+    <% end %>
+  </div>
+
+  <hr>
+  <%= render Pxblog.CommentView, "form.html", changeset: @comment_changeset, action: post_comment_path(@conn, :create, @post) %>
+
+
+  <%= link "Back", to: user_post_path(@conn, :index, @conn.assigns[:user]), class: "button alert" %>
+
+</div>

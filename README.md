@@ -7,7 +7,7 @@ To start your Phoenix app:
   3. Change into the pxblog directory with `cd pxblog`
   4. Install dependencies with `mix deps.get`
   5. Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  6. Populate the database with a user that has admin privileges with `mix run priv/rep/seeds.exs`
+  6. Populate the database with a user that has admin privileges with `mix run priv/repo/seeds.exs`
   7. Install your npm dependencies with `npm install`
   6. Start Phoenix endpoint with `mix phoenix.server`
 

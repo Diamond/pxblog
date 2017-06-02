@@ -4,7 +4,6 @@ defmodule Pxblog.UserController do
   alias Pxblog.User
   alias Pxblog.Role
 
-  plug :scrub_params, "user" when action in [:create, :update]
   plug :authorize_admin when action in [:new, :create]
   plug :authorize_user when action in [:edit, :update, :delete]
 
@@ -56,7 +55,7 @@ defmodule Pxblog.UserController do
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset, roles: roles)
+        render(conn, "edit.html", user: user, changeset: changeset, roles: roles || [])
     end
   end
 

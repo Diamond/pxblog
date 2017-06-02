@@ -1,16 +1,25 @@
 {
   "repository": {},
+  "license": "MIT",
+  "scripts": {
+    "deploy": "brunch build --production",
+    "watch": "brunch watch --stdin"
+  },
   "dependencies": {
-    "babel-brunch": "^6.0.0",
-    "brunch": "^2.1.1",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "css-brunch": ">= 1.0 < 1.8",
-    "javascript-brunch": ">= 1.0 < 1.8",
-    "uglify-js-brunch": ">= 1.0 < 1.8",
     "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html"
+    "phoenix_html": "file:deps/phoenix_html",
+    "simplemde": "^1.11.2"
   },
   "devDependencies": {
-    "jquery": "^2.2.1"
+    "babel-brunch": "~6.0.0",
+    "brunch": "2.7.4",
+    "clean-css-brunch": "~2.0.0",
+    "css-brunch": "~2.0.0",
+    "foundation-sites": "^6.2.3",
+    "javascript-brunch": "~2.0.0",
+    "jquery": "^3.1.0",
+    "motion-ui": "^1.2.2",
+    "sass-brunch": "^2.6.3",
+    "uglify-js-brunch": "~2.0.1"
   }
 }

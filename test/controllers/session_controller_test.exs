@@ -1,12 +1,10 @@
 defmodule Pxblog.SessionControllerTest do
   use Pxblog.ConnCase
-  alias Pxblog.Factory
+  import Pxblog.Factory
 
   setup do
-    role = Factory.create(:role)
-    user = Factory.create(:user, role: role)
-    conn = conn()
-    {:ok, conn: conn, user: user}
+    user = insert(:user)
+    {:ok, conn: build_conn(), user: user}
   end
 
   test "shows the login form", %{conn: conn} do

@@ -1,22 +1,20 @@
 defmodule Pxblog.UserControllerTest do
   use Pxblog.ConnCase
-
   alias Pxblog.User
-  alias Pxblog.Factory
+  import Pxblog.Factory
 
-  @valid_create_attrs %{email: "test@test.com", password: "test1234", password_confirmation: "test1234", username: "testuser"}
-  @valid_attrs %{email: "test@test.com", username: "testuser"}
+  @valid_create_attrs %{email: "test@test.com", username: "test", password: "test", password_confirmation: "test"}
+  @valid_attrs %{email: "test@test.com", username: "test"}
   @invalid_attrs %{}
 
   setup do
-    user_role     = Factory.create(:role)
-    nonadmin_user = Factory.create(:user, role: user_role)
+    user_role     = insert(:role)
+    nonadmin_user = insert(:user, role: user_role)
 
-    admin_role = Factory.create(:role, admin: true)
-    admin_user = Factory.create(:user, role: admin_role)
+    admin_role = insert(:role, admin: true)
+    admin_user = insert(:user, role: admin_role)
 
-    conn = conn()
-    {:ok, conn: conn, admin_role: admin_role, user_role: user_role, nonadmin_user: nonadmin_user, admin_user: admin_user}
+    {:ok, conn: build_conn(), admin_role: admin_role, user_role: user_role, nonadmin_user: nonadmin_user, admin_user: admin_user}
   end
 
   defp valid_create_attrs(role) do
@@ -141,8 +139,9 @@ defmodule Pxblog.UserControllerTest do
 
   @tag admin: true
   test "deletes chosen resource when logged in as that user", %{conn: conn} do
-    user = Factory.create(:user)
-    conn = login_user(conn, user)
+    user = insert(:user)
+    conn =
+      login_user(conn, user)
       |> delete(user_path(conn, :delete, user))
     assert redirected_to(conn) == user_path(conn, :index)
     refute Repo.get(User, user.id)
@@ -150,8 +149,9 @@ defmodule Pxblog.UserControllerTest do
 
   @tag admin: true
   test "deletes chosen resource when logged in as an admin", %{conn: conn, admin_user: admin_user} do
-    user = Factory.create(:user)
-    conn = login_user(conn, admin_user)
+    user = insert(:user)
+    conn =
+      login_user(conn, admin_user)
       |> delete(user_path(conn, :delete, user))
     assert redirected_to(conn) == user_path(conn, :index)
     refute Repo.get(User, user.id)
@@ -159,8 +159,9 @@ defmodule Pxblog.UserControllerTest do
 
   @tag admin: true
   test "redirects away from deleting chosen resource when logged in as a different user", %{conn: conn, nonadmin_user: nonadmin_user} do
-    user = Factory.create(:user)
-    conn = login_user(conn, nonadmin_user)
+    user = insert(:user)
+    conn =
+      login_user(conn, nonadmin_user)
       |> delete(user_path(conn, :delete, user))
     assert get_flash(conn, :error) == "You are not authorized to modify that user!"
     assert redirected_to(conn) == page_path(conn, :index)

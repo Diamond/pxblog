@@ -5,12 +5,15 @@
 # is restricted to this project.
 use Mix.Config
 
+# General application configuration
+config :pxblog,
+  ecto_repos: [Pxblog.Repo]
+
 # Configures the endpoint
 config :pxblog, Pxblog.Endpoint,
   url: [host: "localhost"],
-  root: Path.dirname(__DIR__),
-  secret_key_base: "TaFtu7YnTmckiN8rSX3lxn4RefKXuMWzI8umM9rXHsbT39OTIUGNo5QLp8iLRUe9",
-  render_errors: [accepts: ~w(html json)],
+  secret_key_base: "5Y2kFYMDCQDZlokrNRjW6dR815EKv7lHhEb89gWNRurntAsbQDa77ARgds7zjIBi",
+  render_errors: [view: Pxblog.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Pxblog.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
@@ -22,8 +25,3 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
-
-# Configure phoenix generators
-config :phoenix, :generators,
-  migration: true,
-  binary_id: false

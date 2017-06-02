@@ -1,18 +1,17 @@
 defmodule Pxblog.CommentControllerTest do
   use Pxblog.ConnCase
 
+  import Pxblog.Factory
   alias Pxblog.Comment
-  alias Pxblog.Factory
 
   @valid_attrs %{author: "Some Person", body: "This is a sample comment"}
   @invalid_attrs %{}
 
   setup do
-    user    = Factory.create(:user)
-    post    = Factory.create(:post, user: user)
-    comment = Factory.create(:comment, post: post)
-
-    {:ok, conn: conn, user: user, post: post, comment: comment}
+    user    = insert(:user)
+    post    = insert(:post, user: user)
+    comment = insert(:comment)
+    {:ok, conn: build_conn(), user: user, post: post, comment: comment}
   end
 
   defp login_user(conn, user) do

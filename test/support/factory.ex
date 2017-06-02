@@ -6,17 +6,18 @@ defmodule Pxblog.Factory do
   alias Pxblog.Post
   alias Pxblog.Comment
 
-  def factory(:role) do
+  def role_factory do
     %Role{
       name: sequence(:name, &"Test Role #{&1}"),
       admin: false
     }
   end
 
-  def factory(:user) do
+
+  def user_factory do
     %User{
       username: sequence(:username, &"User #{&1}"),
-      email: sequence(:email, &"test#{&1}@test.com"),
+      email: "test@test.com",
       password: "test1234",
       password_confirmation: "test1234",
       password_digest: Comeonin.Bcrypt.hashpwsalt("test1234"),
@@ -24,7 +25,7 @@ defmodule Pxblog.Factory do
     }
   end
 
-  def factory(:post) do
+  def post_factory do
     %Post{
       title: "Some Post",
       body: "And the body of some post",
@@ -32,7 +33,7 @@ defmodule Pxblog.Factory do
     }
   end
 
-  def factory(:comment) do
+  def comment_factory do
     %Comment{
       author: "Test User",
       body: "This is a sample comment",

@@ -2,7 +2,7 @@ defmodule Pxblog.CommentTest do
   use Pxblog.ModelCase
 
   alias Pxblog.Comment
-  alias Pxblog.Factory
+  import Pxblog.Factory
 
   @valid_attrs %{approved: true, author: "some content", body: "some content"}
   @invalid_attrs %{}
@@ -18,7 +18,7 @@ defmodule Pxblog.CommentTest do
   end
 
   test "creates a comment associated with a post" do
-    comment = Factory.create(:comment)
+    comment = insert(:comment)
     assert comment.post_id
   end
 end

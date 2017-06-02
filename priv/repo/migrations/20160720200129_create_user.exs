@@ -7,7 +7,7 @@ defmodule Pxblog.Repo.Migrations.CreateUser do
       add :email, :string
       add :password_digest, :string
 
-      timestamps
+      timestamps()
     end
 
   end

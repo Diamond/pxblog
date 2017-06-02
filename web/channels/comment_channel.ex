@@ -2,7 +2,9 @@ defmodule Pxblog.CommentChannel do
   use Pxblog.Web, :channel
   alias Pxblog.CommentHelper
 
-  def join("comments:" <> post_id, payload, socket) do
+  require Logger
+
+  def join("comments:" <> _comment_id, payload, socket) do
     if authorized?(payload) do
       {:ok, socket}
     else
@@ -17,13 +19,13 @@ defmodule Pxblog.CommentChannel do
   end
 
   # It is also common to receive messages from the client and
-  # broadcast to everyone in the current topic (comments:lobby).
+  # broadcast to everyone in the current topic (comment:lobby).
   def handle_in("CREATED_COMMENT", payload, socket) do
     case CommentHelper.create(payload, socket) do
       {:ok, comment} ->
         broadcast socket, "CREATED_COMMENT", Map.merge(payload, %{insertedAt: comment.inserted_at, commentId: comment.id, approved: comment.approved})
         {:noreply, socket}
-      {:error, _} ->
+      {:error, message} ->
         {:noreply, socket}
     end
   end
@@ -31,7 +33,13 @@ defmodule Pxblog.CommentChannel do
   def handle_in("APPROVED_COMMENT", payload, socket) do
     case CommentHelper.approve(payload, socket) do
       {:ok, comment} ->
-        broadcast socket, "APPROVED_COMMENT", Map.merge(payload, %{insertedAt: comment.inserted_at, commentId: comment.id})
+        new_payload = payload
+          |> Map.merge(%{
+            insertedAt: comment.inserted_at,
+            commentId: comment.id,
+            approved: comment.approved
+          })
+        broadcast socket, "APPROVED_COMMENT", new_payload
         {:noreply, socket}
       {:error, _} ->
         {:noreply, socket}
@@ -46,14 +54,6 @@ defmodule Pxblog.CommentChannel do
       {:error, _} ->
         {:noreply, socket}
     end
-  end
-
-  # This is invoked every time a notification is being broadcast
-  # to the client. The default implementation is just to push it
-  # downstream but one could filter or change the event.
-  def handle_out(event, payload, socket) do
-    push socket, event, payload
-    {:noreply, socket}
   end
 
   # Add authorization logic here as required.

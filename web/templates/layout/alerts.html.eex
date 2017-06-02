@@ -1,0 +1,13 @@
+<div class="row alerts">
+  <%= if flash = get_flash(@conn, :info) do %>
+    <div class="success callout alert-info" role="alert">
+      <%= flash %>
+    </div>
+  <% end %>
+
+  <%= if flash = get_flash(@conn, :error) do %>
+    <div class="alert callout alert-error" role="alert">
+      <%= flash %>
+    </div>
+  <% end %>
+</div>

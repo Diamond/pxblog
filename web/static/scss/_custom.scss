@@ -1,0 +1,98 @@
+// Put custom styles here
+$darker-gray: #2a2a2a;
+
+html, body {
+  height: 100%;
+  background-image: url("/images/computer-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #000;
+  background-attachment: fixed;
+}
+
+.top-bar {
+  background-color: rgba(0, 0, 0, 0.6);
+  ul {
+    background-color: inherit;
+    padding-left: rem-calc(40);
+    padding-right: rem-calc(40);
+  }
+  a {
+    color: $white;
+  }
+  a:hover {
+    color: $alert-color;
+  }
+  a.button:hover {
+    color: $white;
+  }
+  .logo {
+    padding-right: rem-calc(50);
+    text-transform: uppercase;
+    color: $white;
+    font-weight: bolder;
+  }
+}
+
+.image-overlay {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+section.about {
+  background: rgba(0, 0, 0, 0.6);
+  color: $white;
+  padding: rem-calc(50);
+  .icon {
+    text-align: center;
+    font-size: rem-calc(64);
+    margin-bottom: rem-calc(20);
+  }
+  h2 {
+    text-align: center;
+  }
+}
+
+section.more-info {
+  background: rgba(0, 0, 0, 0.9);
+  color: $white;
+  min-height: 200px;
+  padding: rem-calc(50);
+  .social-media {
+    font-size: rem-calc(48);
+    a {
+      color: white;
+    }
+    a:hover {
+      color: $secondary-color;
+    }
+  }
+}
+
+section.main-content {
+  margin-top: rem-calc(100);
+}
+
+.content {
+  background: rgba(255, 255, 255, 0.8);
+  padding: rem-calc(30);
+}
+
+footer {
+  background-color: #000;
+  color: $white;
+  text-align: center;
+  padding-bottom: rem-calc(20);
+  font-size: rem-calc(14);
+}
+
+.post {
+  background: rgba(255, 255, 255, 0.8);
+  padding: rem-calc(30);
+  margin-bottom: rem-calc(25);
+  .title {
+    text-align: center;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+    margin-bottom: rem-calc(10);
+  }
+}

@@ -3,6 +3,7 @@
   "license": "MIT",
   "scripts": {
     "deploy": "brunch build --production",
+    "build": "brunch build",
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
@@ -15,7 +16,7 @@
     "brunch": "2.7.4",
     "clean-css-brunch": "~2.0.0",
     "css-brunch": "~2.0.0",
-    "foundation-sites": "^6.2.3",
+    "foundation-sites": "^6.3.1",
     "javascript-brunch": "~2.0.0",
     "jquery": "^3.1.0",
     "motion-ui": "^1.2.2",

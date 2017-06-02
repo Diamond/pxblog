@@ -10,9 +10,9 @@
       <div class="col-xs-4 text-right">
         <%= if @conn.assigns[:author_or_admin] do %>
           <%= unless @comment.approved do %>
-            <button class="btn btn-xs btn-primary approve">Approve</button>
+            <button class="button tiny primary approve">Approve</button>
           <% end %>
-          <button class="btn btn-xs btn-danger delete">Delete</button>
+          <button class="button tiny alert delete">Delete</button>
         <% end %>
       </div>
     </div>

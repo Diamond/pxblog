@@ -6,7 +6,7 @@ defmodule Pxblog.Repo.Migrations.CreatePost do
       add :title, :string
       add :body, :text
 
-      timestamps
+      timestamps()
     end
 
   end

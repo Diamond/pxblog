@@ -1,28 +1,37 @@
-<h2>Listing posts</h2>
+<div class="row">
+  <div class="small-10 columns">
+    <h1>Posts</h1>
+  </div>
+  <div class="small-2 columns text-right">
+    <%= if current_user = @conn.assigns[:current_user] do %>
+      <%= link "New post", to: user_post_path(@conn, :new, current_user.id), class: "button expanded large" %>
+    <% end %>
+  </div>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
 <%= for post <- @posts do %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.body %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: user_post_path(@conn, :show, @user, post), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: user_post_path(@conn, :edit, @user, post), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: user_post_path(@conn, :delete, @user, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
+  <div class="row post">
+    <div class="small-12 columns title">
+      <h3><%= post.title %></h3>
+    </div>
+    <div class="small-12 columns">
+      <small>
+        Posted on <%= post.inserted_at %> by <%= link post.user.username, to: user_post_path(@conn, :index, post.user) %>
+      </small>
+    </div>
+    <div class="small-12 columns">
+      <%= markdown(post.body) %>
+    </div>
+    <%= if current_user = @conn.assigns[:current_user] do %>
+      <div class="small-12 medium-4 columns">
+        <%= link "Show", to: user_post_path(@conn, :show, post.user, post), class: "button expanded" %>
+      </div>
+      <div class="small-12 medium-4 columns">
+        <%= link "Edit", to: user_post_path(@conn, :edit, post.user, post), class: "button warning expanded" %>
+      </div>
+      <div class="small-12 medium-4 columns">
+        <%= link "Delete", to: user_post_path(@conn, :delete, post.user, post), method: :delete, data: [confirm: "Are you sure?"], class: "button alert expanded" %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
-  </tbody>
-</table>
-
-<%= link "New post", to: user_post_path(@conn, :new, @user) %>

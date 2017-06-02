@@ -1,8 +1,13 @@
-## This file is a PO Template file. `msgid`s here are often extracted from
-## source code; add new translations manually only if they're dynamic
-## translations that can't be statically extracted. Run `mix
-## gettext.extract` to bring this file up to date. Leave `msgstr`s empty as
-## changing them here as no effect; edit them in PO (`.po`) files instead.
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+
 ## From Ecto.Changeset.cast/4
 msgid "can't be blank"
 msgstr ""
@@ -70,27 +75,17 @@ msgstr[0] ""
 msgstr[1] ""
 
 ## From Ecto.Changeset.validate_number/3
-msgid "must be less than %{count}"
-msgid_plural "must be less than %{count}"
-msgstr[0] ""
-msgstr[1] ""
+msgid "must be less than %{number}"
+msgstr ""
 
-msgid "must be greater than %{count}"
-msgid_plural "must be greater than %{count}"
-msgstr[0] ""
-msgstr[1] ""
+msgid "must be greater than %{number}"
+msgstr ""
 
-msgid "must be less than or equal to %{count}"
-msgid_plural "must be less than or equal to %{count}"
-msgstr[0] ""
-msgstr[1] ""
+msgid "must be less than or equal to %{number}"
+msgstr ""
 
-msgid "must be greater than or equal to %{count}"
-msgid_plural "must be greater than or equal to %{count}"
-msgstr[0] ""
-msgstr[1] ""
+msgid "must be greater than or equal to %{number}"
+msgstr ""
 
-msgid "must be equal to %{count}"
-msgid_plural "must be equal to %{count}"
-msgstr[0] ""
-msgstr[1] ""
+msgid "must be equal to %{number}"
+msgstr ""

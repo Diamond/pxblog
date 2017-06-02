@@ -1,23 +1,23 @@
 <%= if @conn.assigns[:author_or_admin] || @comment.approved do %>
   <div id="comment-<%= @comment.id %>" class="comment" data-comment-id="<%= @comment.id %>">
     <div class="row">
-      <div class="col-xs-4">
+      <div class="columns small-4">
         <strong class="comment-author"><%= @comment.author %></strong>
       </div>
-      <div class="col-xs-4">
+      <div class="columns small-4">
         <em><%= @comment.inserted_at %></em>
       </div>
-      <div class="col-xs-4 text-right">
+      <div class="columns small-4 text-right">
         <%= if @conn.assigns[:author_or_admin] do %>
           <%= unless @comment.approved do %>
-            <button class="btn btn-xs btn-primary approve">Approve</button>
+            <button class="button tiny primary approve">Approve</button>
           <% end %>
-          <button class="btn btn-xs btn-danger delete">Delete</button>
+          <button class="button tiny alert delete">Delete</button>
         <% end %>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 comment-body">
+      <div class="columns small-12 comment-body">
         <%= @comment.body %>
       </div>
     </div>

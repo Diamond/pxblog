@@ -7,34 +7,24 @@ defmodule Pxblog.User do
     field :email, :string
     field :password_digest, :string
 
-    belongs_to :role, Pxblog.Role
-
-    has_many :posts, Pxblog.Post
-
-    timestamps
+    timestamps()
 
     # Virtual Fields
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+
+    has_many :posts, Pxblog.Post
+    belongs_to :role, Pxblog.Role
   end
 
-  @required_fields ~w(username email password password_confirmation role_id)
-  @optional_fields ~w()
-
   @doc """
-  Creates a changeset based on the `model` and `params`.
-
-  If no params are provided, an invalid changeset is returned
-  with no validation performed.
+  Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(model, params \\ :empty) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:username, :email, :password, :password_confirmation, :role_id])
+    |> validate_required([:username, :email, :password, :password_confirmation, :role_id])
     |> hash_password
-    |> validate_confirmation(:password, message: "does not match password!")
-    |> unique_constraint(:username)
-    |> unique_constraint(:email)
-    |> validate_length(:password, min: 4)
   end
 
   defp hash_password(changeset) do

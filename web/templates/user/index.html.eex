@@ -18,9 +18,9 @@
       <td><%= user.password_digest %></td>
 
       <td class="text-right">
-        <%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: user_path(@conn, :show, user), class: "button tiny" %>
+        <%= link "Edit", to: user_path(@conn, :edit, user), class: "button tiny" %>
+        <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "button tiny alert" %>
       </td>
     </tr>
 <% end %>

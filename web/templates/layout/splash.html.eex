@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render "head.html", conn: @conn %>
+
+  <body>
+    <%= render "navigation.html", conn: @conn %>
+
+    <section class="main-content row expanded">
+      <%= render "alerts.html", conn: @conn %>
+
+      <section class="text-center image-overlay row content">
+        <%= render @view_module, @view_template, assigns %>
+      </section>
+
+      <section class="about expanded row">
+        <div class="columns medium-12 large-4">
+          <div class="icon">
+            <i class="fi-like"></i>
+          </div>
+          <h2>What Powers This Blog</h2>
+          <p>
+            This blog is powered by <a href="http://elixir-lang.org">Elixir</a> and <a href="http://phoenixframework.org">Phoenix Framework</a> to
+            give us a super fast, super clean, and super fun to modify blog engine!
+          </p>
+        </div>
+        <div class="columns medium-12 large-4">
+          <div class="icon">
+            <i class="fi-comments"></i>
+          </div>
+          <h2>We Support Live Comments</h2>
+          <p>
+            By using the latest and greatest in client and server technology, we're able to offer a live, realtime commenting system with nearly no impact
+            to performance!
+          </p>
+        </div>
+        <div class="columns medium-12 large-4">
+          <div class="icon">
+            <i class="fi-pencil"></i>
+          </div>
+          <h2>We Support Markdown</h2>
+          <p>
+            We allow you to use <a href="https://daringfireball.net/projects/markdown/">Markdown</a> in all of your posts, which will make it simple to write
+            up each post in the program of your choice and import it into this blog!
+          </p>
+        </div>
+      </section>
+
+      <section class="more-info expanded row">
+        This is an example design for the Phoenix Blog Engine project detailed in my series of
+        <a href="https://medium.com/@diamondgfx/introduction-fe138ac6079d">Medium</a> posts.
+        This design is merely a starting template; you may want to go out and find your own
+        as well to make it look truly original! You're welcome to use the source code for this
+        project as well as the design as you wish! If you're interested in more, please find me
+        on the internet via:
+        <br />
+        <div class="social-media text-center">
+          <a href="http://twitter.com/diamondgfx"><i class="fi-social-twitter"></i></a>
+          <a href="https://medium.com/@diamondgfx/"><i class="fi-social-medium"></i></a>
+        </div>
+      </section>
+
+      <footer class="expanded row">
+        I'm a standard footer for your site! Maybe you can throw a copyright &copy; down here or something like that, or licensing! You know, whatever!
+      </footer>
+    </section>
+
+    <%= render "script.html", conn: @conn %>
+  </body>
+</html>

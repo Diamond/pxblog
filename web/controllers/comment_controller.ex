@@ -23,8 +23,8 @@ defmodule Pxblog.CommentController do
     end
   end
 
-  def update(conn, %{"id" => id, "comment" => comment_params}) do
-    post = conn.assigns[:post]
+  def update(conn, %{"id" => id, "post_id" => post_id, "comment" => comment_params}) do
+    post = Repo.get!(Post, post_id) |> Repo.preload(:user)
     comment = Repo.get!(Comment, id)
     changeset = Comment.changeset(comment, comment_params)
 
@@ -35,15 +35,14 @@ defmodule Pxblog.CommentController do
         |> redirect(to: user_post_path(conn, :show, post.user, post))
       {:error, _} ->
         conn
-        |> put_flash(:error, "Failed to update comment!")
+        |> put_flash(:info, "Failed to update comment!")
         |> redirect(to: user_post_path(conn, :show, post.user, post))
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    post = conn.assigns[:post]
-    comment = Repo.get!(Comment, id)
-    Repo.delete!(comment)
+  def delete(conn, %{"id" => id, "post_id" => post_id}) do
+    post = Repo.get!(Post, post_id) |> Repo.preload(:user)
+    Repo.get!(Comment, id) |> Repo.delete!
     conn
     |> put_flash(:info, "Deleted comment!")
     |> redirect(to: user_post_path(conn, :show, post.user, post))
@@ -69,6 +68,6 @@ defmodule Pxblog.CommentController do
   defp is_authorized_user?(conn) do
     user = get_session(conn, :current_user)
     post = conn.assigns[:post]
-    (user && (user.id == post.user_id || Pxblog.RoleChecker.is_admin?(user)))
+    user && (user.id == post.user_id || Pxblog.RoleChecker.is_admin?(user))
   end
 end
